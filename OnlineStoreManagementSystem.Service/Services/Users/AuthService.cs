@@ -4,6 +4,7 @@ using OnlineStoreManagementSystem.Data.IRepositories;
 using OnlineStoreManagementSystem.Domain.Entitties.Users;
 using OnlineStoreManagementSystem.Service.Exceptions;
 using OnlineStoreManagementSystem.Service.Extensions;
+using OnlineStoreManagementSystem.Service.Interfaces.Users;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -15,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace OnlineStoreManagementSystem.Service.Services.Users
 {
-    public class AuthService
+    public class AuthService : IAuthService
     {
         private readonly IGenericRepository<User> userRepository;
         private readonly IConfiguration configuration;

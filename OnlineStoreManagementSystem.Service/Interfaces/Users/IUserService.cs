@@ -13,7 +13,7 @@ namespace OnlineStoreManagementSystem.Service.Interfaces.Users
     {
         ValueTask<IEnumerable<UserForViewDTO>> GetAllAsync(Expression<Func<User, bool>> expression = null);
         ValueTask<UserForViewDTO> GetAsync(Expression<Func<User, bool>> expression);
-        ValueTask<bool> CreateAsync(UserForCreationDTO dto);
+        ValueTask<UserForViewDTO> CreateAsync(UserForCreationDTO dto);
         ValueTask<bool> DeleteAsync(int id);
         ValueTask<UserForViewDTO> UpdateAsync(int id, UserForUpdateDTO dto);
         ValueTask<bool> ChangePasswordAsync(UserForChangePasswordDTO dto);
