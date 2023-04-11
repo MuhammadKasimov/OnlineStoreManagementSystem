@@ -12,6 +12,5 @@ namespace OnlineStoreManagementSystem.Domain.Entitties.Users
         public Product Product { get; set; }
         public int CartId { get; set; }
         public Cart Cart { get; set; }
-        public decimal TotalPrice { get; set; }
     }
 }

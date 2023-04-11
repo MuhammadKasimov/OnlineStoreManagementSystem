@@ -4,12 +4,6 @@
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Helpers\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="12.0.1" />
 		<PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
@@ -19,6 +13,7 @@
 	</ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OnlineStoreManagementSystem.Data\OnlineStoreManagementSystem.Data.csproj" />
     <ProjectReference Include="..\OnlineStoreManagementSystem.Domain\OnlineStoreManagementSystem.Domain.csproj" />
   </ItemGroup>
 
