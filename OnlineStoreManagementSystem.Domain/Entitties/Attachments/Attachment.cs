@@ -1,6 +1,8 @@
-﻿namespace OnlineStoreManagementSystem.Domain.Entitties.Attachments
+﻿using OnlineStoreManagementSystem.Domain.Commons;
+
+namespace OnlineStoreManagementSystem.Domain.Entitties.Attachments
 {
-    public class Attachment
+    public class Attachment : Auditable
     {
         public string Path { get; set; }
     }

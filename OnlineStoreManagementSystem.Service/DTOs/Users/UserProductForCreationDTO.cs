@@ -1,4 +1,6 @@
-﻿using System;
+﻿using OnlineStoreManagementSystem.Domain.Entitties.Products;
+using OnlineStoreManagementSystem.Domain.Entitties.Users;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +10,10 @@ namespace OnlineStoreManagementSystem.Service.DTOs.Users
 {
     public class UserProductForCreationDTO
     {
+        public int UserId { get; set; }
+        public User User { get; set; }
+        public int ProductId { get; set; }
+        public Product Product { get; set; }
+        public decimal TotalPrice { get; set; }
     }
 }

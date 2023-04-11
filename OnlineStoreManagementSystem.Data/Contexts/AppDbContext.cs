@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OnlineStoreManagementSystem.Domain.Entitties.Carts;
 using OnlineStoreManagementSystem.Domain.Entitties.Products;
 using OnlineStoreManagementSystem.Domain.Entitties.Users;
 using System.Net.Mail;
@@ -16,6 +17,7 @@ namespace OnlineStoreManagementSystem.Contexts
         public DbSet<Attachment> Attachments { get; set; }
         public DbSet<UserProduct> UserProducts { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
