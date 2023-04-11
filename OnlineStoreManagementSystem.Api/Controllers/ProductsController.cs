@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using OnlineStoreManagementSystem.Api.Helpers;
 using OnlineStoreManagementSystem.Service.DTOs.Products;
 using OnlineStoreManagementSystem.Service.Interfaces.Products;
 using System.Threading.Tasks;
@@ -14,7 +16,7 @@ namespace OnlineStoreManagementSystem.Api.Controllers
             this.productService = productService;
         }
 
-        [HttpPost]
+        [HttpPost, Authorize(Roles = CustomRoles.AdminRole)]
         public async ValueTask<IActionResult> CreateAsync([FromForm] ProductForCreationDTO dto)
             => Ok(await productService.CreateAsync(dto));
 
@@ -26,11 +28,11 @@ namespace OnlineStoreManagementSystem.Api.Controllers
         public async ValueTask<IActionResult> GetAsync(long id)
             => Ok(await productService.GetAsync(p => p.Id == id));
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = CustomRoles.AdminRole)]
         public async ValueTask<IActionResult> DeleteAsync(long id)
             => Ok(await productService.DeleteAsync(id));
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize(Roles = CustomRoles.AdminRole)]
         public async ValueTask<IActionResult> UpdateAsync(long id, [FromForm] ProductForCreationDTO dto)
             => Ok(await productService.UpdateAsync(id, dto));
     }

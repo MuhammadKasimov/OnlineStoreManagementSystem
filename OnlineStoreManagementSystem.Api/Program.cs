@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.ApplicationModels;
@@ -10,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using OnlineStoreManagementSystem.Api.Extensions;
 using OnlineStoreManagementSystem.Api.Helpers;
+using OnlineStoreManagementSystem.Api.Middlewares;
 using OnlineStoreManagementSystem.Contexts;
 using OnlineStoreManagementSystem.Service.Helpers;
 using OnlineStoreManagementSystem.Service.Mappers;
