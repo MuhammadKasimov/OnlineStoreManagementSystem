@@ -11,10 +11,10 @@ namespace OnlineStoreManagementSystem.Domain.Entitties.Users
         public string LastName { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public int? AttachmentId { get; set; }
+        public long? AttachmentId { get; set; }
         public Attachment Attachment { get; set; }
         public UserRole Role { get; set; }
-        public int CartId { get; set; }
+        public long CartId { get; set; }
         public Cart Cart { get; set; }
     }
 }

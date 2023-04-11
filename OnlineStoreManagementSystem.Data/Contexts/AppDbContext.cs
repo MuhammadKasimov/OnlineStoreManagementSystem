@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using OnlineStoreManagementSystem.Domain.Entitties.Attachments;
 using OnlineStoreManagementSystem.Domain.Entitties.Carts;
 using OnlineStoreManagementSystem.Domain.Entitties.Products;
 using OnlineStoreManagementSystem.Domain.Entitties.Users;
-using System.Net.Mail;
 
 namespace OnlineStoreManagementSystem.Contexts
 {

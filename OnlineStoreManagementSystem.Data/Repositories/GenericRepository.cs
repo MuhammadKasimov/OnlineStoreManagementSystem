@@ -41,7 +41,7 @@ namespace OnlineStoreManagementSystem.Data.Repositories
         public async ValueTask<T> CreateAsync(T entity) =>
             (await dbContext.AddAsync(entity)).Entity;
 
-        public async ValueTask<bool> DeleteAsync(int id)
+        public async ValueTask<bool> DeleteAsync(long id)
         {
             var entity = await GetAsync(e => e.Id == id);
 

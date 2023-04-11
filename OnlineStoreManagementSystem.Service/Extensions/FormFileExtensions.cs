@@ -1,11 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using OnlineStoreManagementSystem.Service.DTOs.Attachments;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineStoreManagementSystem.Service.Extensions
 {

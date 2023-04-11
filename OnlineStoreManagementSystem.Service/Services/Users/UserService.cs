@@ -12,10 +12,7 @@ using OnlineStoreManagementSystem.Service.Interfaces.Attachments;
 using OnlineStoreManagementSystem.Service.Interfaces.Users;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OnlineStoreManagementSystem.Service.Services.Users
@@ -94,7 +91,7 @@ namespace OnlineStoreManagementSystem.Service.Services.Users
             return mapper.Map<UserForViewDTO>(createdUser);
         }
 
-        public async ValueTask<bool> DeleteAsync(int id)
+        public async ValueTask<bool> DeleteAsync(long id)
         {
             var isDeleted = await userRepository.DeleteAsync(id);
 
@@ -122,7 +119,10 @@ namespace OnlineStoreManagementSystem.Service.Services.Users
             return mapper.Map<UserForViewDTO>(user);
         }
 
-        public async ValueTask<UserForViewDTO> UpdateAsync(int id, UserForUpdateDTO dto)
+        public async Task<UserForViewDTO> GetUserInfoAsync()
+            => await GetAsync(u => u.Id == HttpContextHelper.UserId);
+
+        public async ValueTask<UserForViewDTO> UpdateAsync(long id, UserForUpdateDTO dto)
         {
             var existUser = await userRepository.GetAsync(
                 u => u.Id == id);
@@ -138,6 +138,15 @@ namespace OnlineStoreManagementSystem.Service.Services.Users
 
 
             existUser.UpdatedAt = DateTime.UtcNow;
+
+            if (dto.FormFile != null)
+            {
+                if (existUser.AttachmentId != null)
+                    await attachmentService.UpdateAsync((long)existUser.AttachmentId, dto.FormFile.ToAttachmentOrDefault().Stream);
+                else
+                    await attachmentService.UploadAsync(dto.FormFile.ToAttachmentOrDefault());
+            }
+
             existUser = userRepository.Update(mapper.Map(dto, existUser));
             await userRepository.SaveChangesAsync();
 

@@ -2,9 +2,7 @@
 using OnlineStoreManagementSystem.Service.DTOs.Users;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OnlineStoreManagementSystem.Service.Interfaces.Users
@@ -14,9 +12,10 @@ namespace OnlineStoreManagementSystem.Service.Interfaces.Users
         ValueTask<IEnumerable<UserForViewDTO>> GetAllAsync(Expression<Func<User, bool>> expression = null);
         ValueTask<UserForViewDTO> GetAsync(Expression<Func<User, bool>> expression);
         ValueTask<UserForViewDTO> CreateAsync(UserForCreationDTO dto);
-        ValueTask<bool> DeleteAsync(int id);
-        ValueTask<UserForViewDTO> UpdateAsync(int id, UserForUpdateDTO dto);
+        ValueTask<bool> DeleteAsync(long id);
+        ValueTask<UserForViewDTO> UpdateAsync(long id, UserForUpdateDTO dto);
         ValueTask<bool> ChangePasswordAsync(UserForChangePasswordDTO dto);
         ValueTask<bool> ChangeRoleAsync(long userId, byte roleId);
+        Task<UserForViewDTO> GetUserInfoAsync();
     }
 }

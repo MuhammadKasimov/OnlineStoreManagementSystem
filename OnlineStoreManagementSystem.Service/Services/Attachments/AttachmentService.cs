@@ -5,11 +5,7 @@ using OnlineStoreManagementSystem.Service.Exceptions;
 using OnlineStoreManagementSystem.Service.Helpers;
 using OnlineStoreManagementSystem.Service.Interfaces.Attachments;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OnlineStoreManagementSystem.Service.Services.Attachments
@@ -37,7 +33,7 @@ namespace OnlineStoreManagementSystem.Service.Services.Attachments
             return file;
         }
 
-        public async ValueTask<Attachment> UpdateAsync(int id, Stream stream)
+        public async ValueTask<Attachment> UpdateAsync(long id, Stream stream)
         {
             var existAttachment = await attachmentRepository.GetAsync(a => a.Id == id);
 

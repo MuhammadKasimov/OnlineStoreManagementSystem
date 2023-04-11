@@ -6,10 +6,10 @@ namespace OnlineStoreManagementSystem.Domain.Entitties.Users
 {
     public class UserProduct : Auditable
     {
-        public int ProductId { get; set; }
+        public long ProductId { get; set; }
         public Product Product { get; set; }
         public byte NumberOfProducts { get; set; }
-        public int CartId { get; set; }
+        public long CartId { get; set; }
         public Cart Cart { get; set; }
     }
 }

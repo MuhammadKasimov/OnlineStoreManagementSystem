@@ -1,7 +1,4 @@
-﻿using OnlineStoreManagementSystem.Domain.Entitties.Products;
-using OnlineStoreManagementSystem.Domain.Entitties.Users;
-
-namespace OnlineStoreManagementSystem.Service.DTOs.Users
+﻿namespace OnlineStoreManagementSystem.Service.DTOs.Users
 {
     public class UserProductForCreationDTO
     {

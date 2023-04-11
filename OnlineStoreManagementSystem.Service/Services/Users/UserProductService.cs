@@ -9,9 +9,7 @@ using OnlineStoreManagementSystem.Service.Exceptions;
 using OnlineStoreManagementSystem.Service.Interfaces.Users;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OnlineStoreManagementSystem.Service.Services.Users
@@ -38,7 +36,7 @@ namespace OnlineStoreManagementSystem.Service.Services.Users
         {
             var existCart = await cartRepository.GetAsync(c => c.Id == dto.CartId);
             if (existCart == null)
-                throw new HttpStatusCodeException(404,"Cart not found");
+                throw new HttpStatusCodeException(404, "Cart not found");
 
             var existProduct = await productRepository.GetAsync(p => p.Id == dto.ProductId);
             if (existProduct == null)
@@ -53,7 +51,7 @@ namespace OnlineStoreManagementSystem.Service.Services.Users
             return createdUserProduct;
         }
 
-        public async ValueTask<bool> DeleteAsync(int id)
+        public async ValueTask<bool> DeleteAsync(long id)
         {
             var isDeleted = await userProductRepository.DeleteAsync(id);
 

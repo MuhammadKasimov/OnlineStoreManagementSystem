@@ -1,21 +1,15 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using OnlineStoreManagementSystem.Data.IRepositories;
-using OnlineStoreManagementSystem.Domain.Entitties.Carts;
 using OnlineStoreManagementSystem.Domain.Entitties.Products;
-using OnlineStoreManagementSystem.Domain.Entitties.Users;
 using OnlineStoreManagementSystem.Service.DTOs.Products;
-using OnlineStoreManagementSystem.Service.DTOs.Users;
 using OnlineStoreManagementSystem.Service.Exceptions;
 using OnlineStoreManagementSystem.Service.Extensions;
 using OnlineStoreManagementSystem.Service.Interfaces.Attachments;
 using OnlineStoreManagementSystem.Service.Interfaces.Products;
-using OnlineStoreManagementSystem.Service.Services.Attachments;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OnlineStoreManagementSystem.Service.Services.Products
@@ -26,7 +20,7 @@ namespace OnlineStoreManagementSystem.Service.Services.Products
         private readonly IAttachmentService attachmentService;
         private readonly IMapper mapper;
 
-        public ProductService(IGenericRepository<Product> productRepository, 
+        public ProductService(IGenericRepository<Product> productRepository,
             IAttachmentService attachmentService,
             IMapper mapper)
         {
@@ -47,7 +41,7 @@ namespace OnlineStoreManagementSystem.Service.Services.Products
             return createdProduct;
         }
 
-        public async ValueTask<bool> DeleteAsync(int id)
+        public async ValueTask<bool> DeleteAsync(long id)
         {
             var isDeleted = await productRepository.DeleteAsync(id);
 
@@ -76,13 +70,15 @@ namespace OnlineStoreManagementSystem.Service.Services.Products
             return product;
         }
 
-        public async ValueTask<Product> UpdateAsync(int id, ProductForCreationDTO dto)
+        public async ValueTask<Product> UpdateAsync(long id, ProductForCreationDTO dto)
         {
             var existProduct = await productRepository.GetAsync(
                 u => u.Id == id);
 
             if (existProduct == null)
                 throw new HttpStatusCodeException(404, "Product not found");
+
+            await attachmentService.UpdateAsync(existProduct.AttachmentId,dto.FormFile.ToAttachmentOrDefault().Stream);
 
             existProduct.UpdatedAt = DateTime.UtcNow;
             existProduct = productRepository.Update(mapper.Map(dto, existProduct));
