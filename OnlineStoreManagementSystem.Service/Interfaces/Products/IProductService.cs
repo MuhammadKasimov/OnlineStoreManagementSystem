@@ -15,7 +15,7 @@ namespace OnlineStoreManagementSystem.Service.Interfaces.Products
     {
         ValueTask<IEnumerable<Product>> GetAllAsync(Expression<Func<Product, bool>> expression = null);
         ValueTask<Product> GetAsync(Expression<Func<Product, bool>> expression);
-        ValueTask<bool> CreateAsync(ProductForCreationDTO dto);
+        ValueTask<Product> CreateAsync(ProductForCreationDTO dto);
         ValueTask<bool> DeleteAsync(int id);
         ValueTask<Product> UpdateAsync(int id, ProductForCreationDTO dto);
     }

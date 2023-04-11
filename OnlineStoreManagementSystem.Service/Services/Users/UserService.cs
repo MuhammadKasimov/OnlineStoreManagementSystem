@@ -1,12 +1,14 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using OnlineStoreManagementSystem.Data.IRepositories;
+using OnlineStoreManagementSystem.Domain.Entitties.Carts;
 using OnlineStoreManagementSystem.Domain.Entitties.Users;
 using OnlineStoreManagementSystem.Domain.Enums;
 using OnlineStoreManagementSystem.Service.DTOs.Users;
 using OnlineStoreManagementSystem.Service.Exceptions;
 using OnlineStoreManagementSystem.Service.Extensions;
 using OnlineStoreManagementSystem.Service.Helpers;
+using OnlineStoreManagementSystem.Service.Interfaces.Attachments;
 using OnlineStoreManagementSystem.Service.Interfaces.Users;
 using System;
 using System.Collections.Generic;
@@ -21,12 +23,14 @@ namespace OnlineStoreManagementSystem.Service.Services.Users
     public class UserService : IUserService
     {
         private readonly IGenericRepository<User> userRepository;
+        private readonly IAttachmentService attachmentService;
         private readonly IMapper mapper;
 
-        public UserService(IGenericRepository<User> userRepository, IMapper mapper)
+        public UserService(IGenericRepository<User> userRepository, IMapper mapper, IAttachmentService attachmentService)
         {
             this.userRepository = userRepository;
             this.mapper = mapper;
+            this.attachmentService = attachmentService;
         }
 
         public async ValueTask<bool> ChangePasswordAsync(UserForChangePasswordDTO dto)
@@ -38,7 +42,6 @@ namespace OnlineStoreManagementSystem.Service.Services.Users
 
             if (user.Password != dto.OldPassword.Encrypt())
                 throw new HttpStatusCodeException(400, "Password is incorrect");
-
 
             user.Password = dto.NewPassword.Encrypt();
 
@@ -78,8 +81,14 @@ namespace OnlineStoreManagementSystem.Service.Services.Users
 
             var createdUser = await userRepository.CreateAsync(mapper.Map<User>(dto));
 
-            createdUser.Password = createdUser.Password.Encrypt();
+            if (dto.FormFile != null)
+            {
+                var createdAttachment = await attachmentService.UploadAsync(dto.FormFile.ToAttachmentOrDefault());
+                createdUser.AttachmentId = createdAttachment.Id;
+            }
 
+            createdUser.Password = createdUser.Password.Encrypt();
+            createdUser.Cart = new Cart();
             await userRepository.SaveChangesAsync();
 
             return mapper.Map<UserForViewDTO>(createdUser);
