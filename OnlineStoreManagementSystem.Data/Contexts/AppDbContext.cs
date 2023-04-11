@@ -24,6 +24,11 @@ namespace OnlineStoreManagementSystem.Contexts
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.Username)
                 .IsUnique(true);
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Cart)
+                .WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

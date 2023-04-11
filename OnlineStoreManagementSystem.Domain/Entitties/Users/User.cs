@@ -1,7 +1,7 @@
 ﻿using OnlineStoreManagementSystem.Domain.Commons;
 using OnlineStoreManagementSystem.Domain.Entitties.Attachments;
+using OnlineStoreManagementSystem.Domain.Entitties.Carts;
 using OnlineStoreManagementSystem.Domain.Enums;
-using System.Collections.Generic;
 
 namespace OnlineStoreManagementSystem.Domain.Entitties.Users
 {
@@ -14,5 +14,7 @@ namespace OnlineStoreManagementSystem.Domain.Entitties.Users
         public int? AttachmentId { get; set; }
         public Attachment Attachment { get; set; }
         public UserRole Role { get; set; }
+        public int CartId { get; set; }
+        public Cart Cart { get; set; }
     }
 }

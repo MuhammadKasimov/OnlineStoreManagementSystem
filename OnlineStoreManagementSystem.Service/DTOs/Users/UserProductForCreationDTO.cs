@@ -1,10 +1,5 @@
 ﻿using OnlineStoreManagementSystem.Domain.Entitties.Products;
 using OnlineStoreManagementSystem.Domain.Entitties.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineStoreManagementSystem.Service.DTOs.Users
 {
